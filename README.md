@@ -1,5 +1,8 @@
 # Cornbabies: The Game
-hunt down cursed corn babies with flashlight or you will get hunted..
+hunt down cursed corn babies with the flashlight or you will get hunted..
+
+# project features:
+- infinite cornfield generation
 
 # In-game Screenshots
 ![Alt text](https://github.com/Alizadev/Cornbabies_The_Game/blob/main/Screenshot%202023-09-17%20142356.png "#1")
