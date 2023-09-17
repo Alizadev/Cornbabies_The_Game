@@ -1,7 +1,7 @@
 # Cornbabies: The Game
 hunt down cursed corn babies with the flashlight or you will get hunted..
 
-# project features:
+# Project features:
 - infinite cornfield generation
 
 # In-game Screenshots
