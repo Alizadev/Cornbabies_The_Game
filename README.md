@@ -1,4 +1,4 @@
-# Cornbabies_The_Game
+# Cornbabies: The Game
 hunt down cursed corn babies with flashlight or you will get hunted..
 
 # In-game Screenshots
