@@ -7,3 +7,4 @@ hunt down cursed corn babies with flashlight or you will get hunted..
 
 # License
 you can modify and build upon but not use it commercially and credit the creator by providing links.
+`Attribution-NonCommercial-ShareAlike 4.0 International`
