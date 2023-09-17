@@ -3,6 +3,7 @@ hunt down cursed corn babies with the flashlight or you will get hunted..
 
 # Project features:
 - infinite cornfield generation
+- mobile-optimized bloom
 
 # In-game Screenshots
 ![Alt text](https://github.com/Alizadev/Cornbabies_The_Game/blob/main/Screenshot%202023-09-17%20142356.png "#1")
