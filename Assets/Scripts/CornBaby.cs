@@ -22,10 +22,10 @@ public class CornBaby : MonoBehaviour
     public GameObject prefabSpawn;
     public ParticleSystem prefabFade;
 
-    public Cornfield _cf;
-
     Vector3 _moveDir;
     float dirNoise;
+
+    float slowUpdate;
 
     // Start is called before the first frame update
     void Start()
@@ -61,12 +61,24 @@ public class CornBaby : MonoBehaviour
         myRigid.velocity = _moveDir * speed;
     }
 
+    void SlowUpdate()
+    {
+        Cornfield.Instance.CheckCornDist(transform.position);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (_player.dead)
         {
             Destroy(gameObject);
+        }
+        //slow update
+        slowUpdate -= Time.deltaTime;
+        if (slowUpdate < 0)
+        {
+            slowUpdate = 0.2f;
+            SlowUpdate();
         }
         //death
         if (health <= 0 && dead == false)
@@ -171,6 +183,6 @@ public class CornBaby : MonoBehaviour
 
     void ScoreMe()
     {
-        _cf.score++;
+        Cornfield.Instance.score++;
     }
 }

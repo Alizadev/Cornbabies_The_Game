@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Cornfield : MonoBehaviour
 {
+    public static Cornfield Instance { get; private set; }
+
     public int cornAmount = 5;
     [Range(1, 20)]
     public int cornScale = 2;
@@ -14,21 +17,38 @@ public class Cornfield : MonoBehaviour
     Vector3[] generatedPoint;
     bool firstInit = false;
 
+    [HideInInspector]
+    public List<CornPlant> allCorns;
+
     Vector3 _lastPos;
 
     public int score;
     public Text scoreTxt;
 
+    public AudioSource[] bushSoundPool;
+    public AudioClip[] bushHitClips;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        allCorns = new List<CornPlant>();
         cornPool = new GameObject[cornAmount * cornAmount];
         //create corn
         for (int i = 0; i < cornAmount * cornAmount; i++)
         {
             //clone
             cornPool[i] = Instantiate(cornPrefab, Vector3.zero, Quaternion.identity);
+            foreach (CornPlant cp in cornPool[i].GetComponentsInChildren<CornPlant>())
+            {
+                allCorns.Add(cp);
+            }
         }
+        Debug.Log("all corns: " + allCorns.Count);
         Destroy(cornPrefab);
     }
     // Update is called once per frame
@@ -145,6 +165,17 @@ public class Cornfield : MonoBehaviour
                 {
                     cornPool[i].transform.rotation = Quaternion.Euler(0, v3.y, 0);
                 }
+            }
+        }
+    }
+
+    public void CheckCornDist(Vector3 _target)
+    {
+        foreach (CornPlant cp in allCorns)
+        {
+            if ((cp.transform.position - _target).sqrMagnitude < 2)
+            {
+                cp.MakeNoise();
             }
         }
     }
