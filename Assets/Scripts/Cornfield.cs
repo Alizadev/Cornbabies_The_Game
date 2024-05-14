@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Cornfield : MonoBehaviour
@@ -178,5 +179,10 @@ public class Cornfield : MonoBehaviour
                 cp.MakeNoise();
             }
         }
+    }
+
+    public void QuitGame()
+    {
+        SceneManager.LoadScene(1);
     }
 }

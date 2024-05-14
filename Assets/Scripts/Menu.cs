@@ -13,9 +13,14 @@ public class Menu : MonoBehaviour
     public CanvasGroup blackscreen;
     public BloomOptimized bloom;
 
+    int screenWidth;
+    int screenHeight;
+
     // Start is called before the first frame update
     void Start()
     {
+        DropResolution();
+
         //load
         if (PlayerPrefs.HasKey("Graphics"))
         {
@@ -29,6 +34,24 @@ public class Menu : MonoBehaviour
             }
         }
         UpdateGraphics();
+    }
+
+    void DropResolution()
+    {
+        if (PlayerPrefs.HasKey("NativeScreenResolution"))
+        {
+            screenWidth = int.Parse(PlayerPrefs.GetString("NativeScreenResolution").Split('x')[0]);
+            screenHeight = int.Parse(PlayerPrefs.GetString("NativeScreenResolution").Split('x')[1]);
+        }
+        else
+        {
+            screenWidth = Screen.width;
+            screenHeight = Screen.height;
+            PlayerPrefs.SetString("NativeScreenResolution", screenWidth + "x" + screenHeight);
+        }
+        //drop resolution
+        int resolutionPercent = 80;
+        Screen.SetResolution(screenWidth * resolutionPercent / 100, screenHeight * resolutionPercent / 100, Screen.fullScreen);
     }
 
     public void QuitTheGame()

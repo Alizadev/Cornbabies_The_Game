@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CnControls;
-using UnityEngine.SceneManagement;
 using UnityStandardAssets.ImageEffects;
 
 public class PlayerControl : MonoBehaviour
@@ -48,11 +47,6 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //escape
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene(1);
-        }
         //dead
         if (health <= 0 && dead == false)
         {
@@ -72,11 +66,6 @@ public class PlayerControl : MonoBehaviour
         CameraAnimation();
         //regen
         health = Mathf.MoveTowards(health, 100, 10f * Time.deltaTime);
-    }
-
-    public void ResetGame()
-    {
-        SceneManager.LoadScene(1);
     }
 
     void CameraAnimation()

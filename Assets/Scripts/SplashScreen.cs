@@ -63,14 +63,16 @@ public class SplashScreen : MonoBehaviour
                 }
                 yield return null;
             }
+            //light up
+            pressToContinue.color = pressCol;
             //hide
             while (termsCanvas.alpha > 0)
             {
-                termsCanvas.alpha = Mathf.MoveTowards(termsCanvas.alpha, 0f, 5f * Time.deltaTime);
+                termsCanvas.alpha = Mathf.MoveTowards(termsCanvas.alpha, 0f, 2f * Time.deltaTime);
                 yield return null;
             }
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(1);
     }
 }
