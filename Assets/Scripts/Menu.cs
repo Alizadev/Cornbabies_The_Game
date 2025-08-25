@@ -26,6 +26,11 @@ public class Menu : MonoBehaviour
         {
             graphics = PlayerPrefs.GetInt("Graphics");
         }
+        else
+        {
+            graphics = 1;
+            PlayerPrefs.SetInt("Graphics", graphics);
+        }
         if (PlayerPrefs.HasKey("Music"))
         {
             if (PlayerPrefs.GetInt("Music") == 0)
@@ -34,6 +39,8 @@ public class Menu : MonoBehaviour
             }
         }
         UpdateGraphics();
+
+        StartCoroutine(Leaderboard.Instance.GetMyRank());
     }
 
     void DropResolution()
@@ -61,16 +68,16 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            PlayerPrefs.DeleteAll();
-            Debug.Log("All data deleted.");
-        }
-        blackscreen.alpha = Mathf.MoveTowards(blackscreen.alpha, 0f, 0.5f * Time.deltaTime);
+        blackscreen.alpha = Mathf.MoveTowards(blackscreen.alpha, 0f, 2f * Time.deltaTime);
     }
 
     public void ToggleMusic()
     {
+        if (GameObject.Find("_Music") == null)
+        {
+            Debug.Log("[Menu] can't find music object.");
+            return;
+        }
         if (music == 0)
         {
             music = 1;
@@ -90,7 +97,7 @@ public class Menu : MonoBehaviour
     public void ToggleGraphics()
     {
         graphics++;
-        if (graphics > 3)
+        if (graphics > 2)
         {
             graphics = 0;
         }
@@ -113,19 +120,12 @@ public class Menu : MonoBehaviour
             bloom.enabled = true;
             gfxStats.text = "GRAPHICS\nMedium";
         }
-        if (graphics == 2)
+        if (graphics >= 2)
         {
             QualitySettings.shadowDistance = 30;
             QualitySettings.shadowResolution = ShadowResolution.Medium;
             bloom.enabled = true;
             gfxStats.text = "GRAPHICS\nHigh";
-        }
-        if (graphics == 3)
-        {
-            QualitySettings.shadowDistance = 30;
-            QualitySettings.shadowResolution = ShadowResolution.VeryHigh;
-            bloom.enabled = true;
-            gfxStats.text = "GRAPHICS\nVery-High";
         }
     }
 

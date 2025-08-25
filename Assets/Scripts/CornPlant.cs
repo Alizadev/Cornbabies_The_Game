@@ -18,15 +18,19 @@ public class CornPlant : MonoBehaviour
     {
         makingNoise = true;
         //bush sound
-        foreach (AudioSource bushSound in Cornfield.Instance.bushSoundPool)
+        float distToPlayer = (transform.position - PlayerControl.Instance.transform.position).magnitude;
+        if (distToPlayer < Cornfield.Instance.bushSoundPool[0].maxDistance)
         {
-            if (bushSound.isPlaying == false)
+            foreach (AudioSource bushSound in Cornfield.Instance.bushSoundPool)
             {
-                bushSound.transform.position = transform.position + Vector3.up;
-                bushSound.clip = Cornfield.Instance.bushHitClips[Random.Range(0, Cornfield.Instance.bushHitClips.Length)];
-                bushSound.pitch = Random.Range(0.9f, 1.1f);
-                bushSound.Play();
-                break;
+                if (bushSound.isPlaying == false)
+                {
+                    bushSound.transform.position = transform.position + Vector3.up;
+                    bushSound.clip = Cornfield.Instance.bushHitClips[Random.Range(0, Cornfield.Instance.bushHitClips.Length)];
+                    bushSound.pitch = Random.Range(0.9f, 1.1f);
+                    bushSound.Play();
+                    break;
+                }
             }
         }
         //animate

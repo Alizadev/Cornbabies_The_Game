@@ -28,17 +28,6 @@ public class SplashScreen : MonoBehaviour
         StartCoroutine(SplashIt());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void AcceptTerms()
-    {
-        termsAccepted = true;
-    }
-
     IEnumerator SplashIt()
     {
         if (termsAccepted)
@@ -55,12 +44,7 @@ public class SplashScreen : MonoBehaviour
                 //
                 termsCanvas.alpha = Mathf.MoveTowards(termsCanvas.alpha, 1f, 5f * Time.deltaTime);
                 //text pulse
-                pressToContinue.color = new Color(pressCol.r, pressCol.g, pressCol.b, Mathf.PingPong(Time.time * 2f, 1.5f));
-                //wait for accept
-                if (Input.GetMouseButtonDown(0) && termsCanvas.alpha == 1f)
-                {
-                    termsAccepted = true;
-                }
+                pressToContinue.color = new Color(pressCol.r, pressCol.g, pressCol.b, Mathf.PingPong(Time.time * 2f, 1.5f));                
                 yield return null;
             }
             //light up
@@ -74,5 +58,27 @@ public class SplashScreen : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(1);
+    }
+
+    public void AcceptTerms()
+    {
+        if (termsCanvas.alpha < 1f)
+        {
+            return;
+        }
+        termsAccepted = true;
+    }
+
+    public void OpenPrivacyPolicy()
+    {
+        Application.OpenURL(CornUtility.POLICY_ADDRESS);
+    }
+
+    private void OnGUI()
+    {
+        GUI.color = Color.gray;
+        GUILayout.BeginArea(new Rect(20, Screen.height - 20, Screen.width, 128));
+        GUILayout.Label("v" + Application.version);
+        GUILayout.EndArea();
     }
 }

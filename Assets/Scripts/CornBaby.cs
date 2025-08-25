@@ -30,12 +30,12 @@ public class CornBaby : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("RandomDir", 0, 5);
+        InvokeRepeating(nameof(RandomDir), 0, 5);
     }
 
     void RandomDir()
     {
-        Vector3 randomDir = new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1));
+        Vector3 randomDir = new(Random.Range(-1, 1), 0, Random.Range(-1, 1));
         _moveDir = randomDir;
     }
 
@@ -84,8 +84,8 @@ public class CornBaby : MonoBehaviour
         if (health <= 0 && dead == false)
         {
             dead = true;
-            Invoke("SpawnMeBack", 2.3f);
-            Invoke("ScoreMe", 2.3f);
+            Invoke(nameof(SpawnMeBack), 2.3f);
+            Invoke(nameof(ScoreMe), 2.3f);
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Death") && !anim.IsInTransition(0))
             {
                 anim.CrossFade("Death", 0.1f);
@@ -183,6 +183,6 @@ public class CornBaby : MonoBehaviour
 
     void ScoreMe()
     {
-        Cornfield.Instance.score++;
+        GameManager.Instance.AddScore(1);
     }
 }

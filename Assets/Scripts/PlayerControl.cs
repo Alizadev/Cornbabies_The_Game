@@ -6,6 +6,8 @@ using UnityStandardAssets.ImageEffects;
 
 public class PlayerControl : MonoBehaviour
 {
+    public static PlayerControl Instance { get; private set; }
+
     public bool dead = false;
     public float health = 100;
     bool running = false;
@@ -17,8 +19,6 @@ public class PlayerControl : MonoBehaviour
     public Transform weaponCam;
 
     public CanvasGroup viggnette;
-    public GameObject deadObject;
-
 
     public AudioSource footstep;
     public AudioSource pantFast;
@@ -28,6 +28,11 @@ public class PlayerControl : MonoBehaviour
 
     Vector2 _lookDir;
     Vector3 _moveDir;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -51,8 +56,6 @@ public class PlayerControl : MonoBehaviour
         if (health <= 0 && dead == false)
         {
             dead = true;
-            deadObject.SetActive(true);
-            Invoke("ResetGame", 5f);
         }
         //return
         if (health <= 0)

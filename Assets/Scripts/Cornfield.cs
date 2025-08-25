@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Cornfield : MonoBehaviour
 {
@@ -22,9 +20,6 @@ public class Cornfield : MonoBehaviour
     public List<CornPlant> allCorns;
 
     Vector3 _lastPos;
-
-    public int score;
-    public Text scoreTxt;
 
     public AudioSource[] bushSoundPool;
     public AudioClip[] bushHitClips;
@@ -55,12 +50,11 @@ public class Cornfield : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreTxt.text = score.ToString();
         //generate new seed
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            GenerateSeed();
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    GenerateSeed();
+        //}
         if ((_player.position - _lastPos).magnitude > 0.25f)
         {
             _lastPos = _player.position;
@@ -179,10 +173,5 @@ public class Cornfield : MonoBehaviour
                 cp.MakeNoise();
             }
         }
-    }
-
-    public void QuitGame()
-    {
-        SceneManager.LoadScene(1);
     }
 }
